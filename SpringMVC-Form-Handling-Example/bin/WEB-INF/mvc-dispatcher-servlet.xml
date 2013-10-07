@@ -1,0 +1,36 @@
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+	<bean
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	
+	<bean class="com.mkyong.customer.controller.CustomerController">
+		<property value="CustomerForm" name="formView" />
+		<property value="CustomerSuccess" name="successView" />
+		<!-- Map a validator -->
+		
+		<property name="validator">
+			<bean class="com.mkyong.customer.validator.CustomerValidator" />
+		</property>
+	</bean>
+	<!-- Register the Customer.properties -->
+	
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
+		<property value="com/mkyong/customer/properties/Customer"
+			name="basename" />
+	</bean>
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		id="viewResolver">
+		
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+	
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>
